@@ -60,4 +60,20 @@ main();
 8:40 - change table 'Users' to 'users'
 9:19 - edit attributes in 'users' table
 10:10 - pass `{ force: true }` to `sequelize.sync()` to update table
-11:25 - install express
+11:25 - install express and set up express app
+11:57 - create express route to create user in database
+14:42 - use Insomnia to test the route
+15:52 - implement uuid in 'User' model
+16:49 - migrations explanation
+18:35 - run `sequelize db:drop` to delete database
+18:55 - create db again, use `sequelize.authenticate()`
+19:34 - run `sequelize db:migrate` to run migrations
+20:40 - hide user ID
+21:56 - create endpoint (route) to fetch all users
+23:57 - create endpoint to find user
+25:09 - create db model 'Post'
+27:14 - run migration
+27:45 - create one-to-many relationship between 'User' and 'Post'
+29:55 - revert migration using `sequelize db:migrate:undo`
+30:39 - create endpoint for creating posts
+33:32 - hide user id and post id
