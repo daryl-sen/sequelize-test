@@ -1,15 +1,26 @@
+require("dotenv").config();
+
 const express = require("express");
+const PORT = process.env.PORT || 3000;
 const { sequelize } = require("./models");
-
 const app = express();
-app.use(express.json());
 
-app.get("/users", async (req, res) => {
-  const { name, email, role } = req.body;
+app.get("/", async (req, res) => {
+  return res.send("Hello");
 });
 
-async function main() {
-  await sequelize.sync();
-}
+app.post("/create-user", async () => {
+  const { name, email, role } = req.body;
 
-main();
+  try {
+    const user = await User.create({ name, email, role });
+    return res.json(user);
+  } catch (error) {
+    return res.status(500).json(err);
+  }
+});
+
+app.listen(PORT, async () => {
+  await sequelize.sync({ force: true });
+  console.log(`Running on port: ${PORT}`);
+});
