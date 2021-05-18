@@ -25,3 +25,5 @@ npm install --save tedious # Microsoft SQL Server
 ```
 
 ## Timestamps
+
+1:51 - Install dependencies and project setup
