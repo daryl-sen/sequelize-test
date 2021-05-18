@@ -77,3 +77,9 @@ main();
 29:55 - revert migration using `sequelize db:migrate:undo`
 30:39 - create endpoint for creating posts
 33:32 - hide user id and post id
+34:09 - join tables to get user name on posts
+35:24 - change 'User' to 'user' by using an alias
+37:49 - add validation to model
+41:57 - create DELETE endpoint
+42:49 - create UPDATE endpoint
+46:38 - seeders explanation
