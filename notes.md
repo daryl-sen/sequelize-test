@@ -10,7 +10,8 @@ https://sequelize.org/master/manual/getting-started.html
 Install sequelize
 
 ```
-npm i sequelize sequelize-cli
+npm i sequelize
+(sudo) npm i -g sequelize-cli
 ```
 
 Depending on the database:
