@@ -25,6 +25,39 @@ npm install --save sqlite3
 npm install --save tedious # Microsoft SQL Server
 ```
 
+## Create a database using CLI
+
+Update `config.json` and run `sequelize db:create` to create a database if it doesn't already exist.
+
+## Create a table using CLI
+
+Run `sequelize model:generate --name <name> --attributes <attributes>` to generate a table.
+
+Attributes should be separated by a comma with no spaces, i.e. `--attributes name:string,role:string`. This will generate a new model inside /models with a lower-case version of the name provided.
+
+## Using sequelize in app.js
+
+```
+const { sequelize } = require('./models');
+
+async function main() {
+    await sequelize.sync();
+}
+
+main();
+```
+
+## Editting a model
+
 ## Timestamps
 
-1:51 - Install dependencies and project setup
+1:51 - install dependencies and project setup
+2:16 - install `sequelize-cli` globally
+2:33 - run `sequelize init` and fill in json.config
+4:30 - create database using `sequelize db:create`
+5:16 - create a table using `sequelize model:generate --name <name> --attributes <attributes>`
+7:18 - use sequelize instance in app.js using `sequelize.sync()`
+8:40 - change table 'Users' to 'users'
+9:19 - edit attributes in 'users' table
+10:10 - pass `{ force: true }` to `sequelize.sync()` to update table
+11:25 - install express
