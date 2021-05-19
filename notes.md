@@ -47,7 +47,38 @@ async function main() {
 main();
 ```
 
-## Editting a model
+## CRUD
+
+### Create
+
+```
+// import the model
+const { sequelize, <model> } = require('./models');
+
+// ...
+const newEntry = await <model>.create({ attr1, attr2 });
+return res.json(newEntry);
+// ...
+```
+
+### Read
+
+```
+// ...
+const target = await <model>.findOne({
+    where: { attr: query }
+})
+// ...
+
+```
+
+### Update
+
+### Delete
+
+## Associations (relationships)
+
+## Model aliases
 
 ## Timestamps
 
