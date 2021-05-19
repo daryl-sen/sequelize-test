@@ -23,6 +23,12 @@ app.post("/create-user", async (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  await sequelize.sync({ force: true });
+  try {
+    await sequelize.authenticate();
+    console.log("Connected to database");
+  } catch (error) {
+    return console.log(error);
+  }
+  // await sequelize.sync({ force: true });
   console.log(`Running on port: ${PORT}`);
 });
