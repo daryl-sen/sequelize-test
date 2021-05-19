@@ -1,0 +1,3 @@
+/*
+This file constructs the config.json file using environment variables.
+*/
