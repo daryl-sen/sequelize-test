@@ -78,6 +78,29 @@ const target = await <model>.findOne({
 
 ## Associations (relationships)
 
+### One to many
+
+Find in `/models/<model>.js`
+
+In the parent model:
+
+```
+// ...
+static associate({ <parentModel> }) {
+    this.belongsTo(<parentModel>, { foreignKey: '<parentModelName>Id'});
+}
+// ...
+```
+
+In the child model:
+
+```
+// ...
+static associate({ <childModel> }) {
+    this.hasMany(<childModel>, { foreignKey: '<childModelName>Id' })
+}
+```
+
 ## Model aliases
 
 ## Timestamps
