@@ -1,5 +1,16 @@
 # Sequelize video tutorial notes
 
+## Repo setup
+
+A few files have been added to .gitignore:
+
+```
+.env
+/config/config.json
+```
+
+Reconstruct these files using their respective .example files to set up this repo.
+
 ## Sources
 
 https://www.youtube.com/watch?v=3qlnR9hK-lQ&t
