@@ -74,7 +74,23 @@ const target = await <model>.findOne({
 
 ### Update
 
+```
+//...
+const target = await <model>.findOne({ where: { attr: query}});
+target.attr1 = 'newValue';
+await target.save();
+await target.destroy()
+//...
+```
+
 ### Delete
+
+```
+//...
+const target = await <model>.findOne({ where: { attr: query}})
+await target.destroy()
+//...
+```
 
 ## Associations (relationships)
 
