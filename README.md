@@ -140,8 +140,30 @@ toJSON() {
 }
 ```
 
+## Validation
+
+https://sequelize.org/master/manual/validations-and-constraints.html#validators
+
+Add to model attribute:
+
+```
+//...
+name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+        notNull: { msg: 'error message' },
+        // ... add more validators
+    }
+}
+//...
+```
+
 ## Timestamps
 
+Video: https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
+
+```
 1:51 - install dependencies and project setup
 2:16 - install `sequelize-cli` globally
 2:33 - run `sequelize init` and fill in json.config
@@ -174,3 +196,4 @@ toJSON() {
 41:57 - create DELETE endpoint
 42:49 - create UPDATE endpoint
 46:38 - seeders explanation
+```
