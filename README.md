@@ -3,6 +3,7 @@
 ## Sources
 
 https://www.youtube.com/watch?v=3qlnR9hK-lQ&t
+
 https://sequelize.org/master/manual/getting-started.html
 
 ## Installation
@@ -118,6 +119,26 @@ static associate({ <childModel> }) {
 ```
 
 ## Model aliases
+
+When defining a relationship, an alias can be passed to `.belongsTo`
+
+```
+// ...
+static associate({ <parentModel> }) {
+    this.belongsTo(<parentModel>, { foreignKey: '<parentModelName>Id' }, as: 'alias');
+}
+// ...
+```
+
+## Hiding fields
+
+To hide specific fields when retrieving data, go to its model and add the following:
+
+```
+toJSON() {
+    return { ...this.get(), <attr>: undefined }
+}
+```
 
 ## Timestamps
 
