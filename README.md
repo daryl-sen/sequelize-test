@@ -63,6 +63,8 @@ main();
 
 ### Create
 
+Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries
+
 ```
 // import the model
 const { sequelize, <model> } = require('./models');
@@ -73,7 +75,22 @@ return res.json(newEntry);
 // ...
 ```
 
+### Bulk create
+
+Source: https://sequelize.org/master/manual/model-querying-basics.html#creating-in-bulk
+
+```
+// ...
+await <model>.bulkcreate([
+    { attr: value },
+    // more objects
+])
+// ...
+```
+
 ### Read
+
+Source: https://sequelize.org/master/manual/model-querying-basics.html#applying-where-clauses
 
 ```
 // ...
@@ -86,6 +103,8 @@ const target = await <model>.findOne({
 
 ### Update
 
+Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-update-queries
+
 ```
 //...
 const target = await <model>.findOne({ where: { attr: query}});
@@ -97,6 +116,8 @@ await target.destroy()
 
 ### Delete
 
+Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-delete-queries
+
 ```
 //...
 const target = await <model>.findOne({ where: { attr: query}})
@@ -105,6 +126,8 @@ await target.destroy()
 ```
 
 ## Associations (relationships)
+
+Source: https://sequelize.org/master/manual/creating-with-associations.html
 
 ### One to many
 
@@ -129,6 +152,10 @@ static associate({ <childModel> }) {
 }
 ```
 
+### Many to many
+
+https://sequelize.org/master/manual/advanced-many-to-many.html
+
 ## Model aliases
 
 When defining a relationship, an alias can be passed to `.belongsTo`
@@ -146,9 +173,12 @@ static associate({ <parentModel> }) {
 To hide specific fields when retrieving data, go to its model and add the following:
 
 ```
+// ...
+static associate() {};
 toJSON() {
     return { ...this.get(), <attr>: undefined }
 }
+// ...
 ```
 
 ## Validation
