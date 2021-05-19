@@ -2,21 +2,23 @@ require("dotenv").config();
 
 const express = require("express");
 const PORT = process.env.PORT || 3000;
-const { sequelize } = require("./models");
+const { sequelize, User } = require("./models");
 const app = express();
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   return res.send("Hello");
 });
 
-app.post("/create-user", async () => {
+app.post("/create-user", async (req, res) => {
   const { name, email, role } = req.body;
 
   try {
     const user = await User.create({ name, email, role });
     return res.json(user);
   } catch (error) {
-    return res.status(500).json(err);
+    console.log(error);
+    return res.status(500).json(error);
   }
 });
 
