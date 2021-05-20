@@ -200,6 +200,14 @@ name: {
 //...
 ```
 
+## Seeders
+
+Source: https://www.npmjs.com/package/sequelize-cli
+
+To generate a seeder, use `sequelize seed:generate --name <name>`. This will create a new seeder in /seeders.
+
+To run a seeder, use `sequelize db:seed <name>`, or `sequelize db:seed:all`.
+
 ## Timestamps
 
 Video: https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
