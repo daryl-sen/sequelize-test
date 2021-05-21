@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         onDelete: "cascade",
       });
+      this.belongsToMany(models.Tag, { through: "PostTags", as: "tag" });
     }
   }
   Post.init(
