@@ -31,7 +31,7 @@ In the `User` model, we find a static method `associate` (you can see this entir
     }
 ```
 
-`this.hasMany()` is quite verbose. It takes in two arguments here: the child model and an optional object for additional configuration. If a `foreignKey` were not specified here, the default column name would have been `UserId`. Passing a foreignKey here overrides the default value, and is useful if you're using a different set of naming conventions. Personally, I recommend going with the default so that sequelize won't be fighting you every step of the way. Whichever you choose, just be consistent.
+`this.hasMany()` is quite verbose. It takes in two arguments here: the child model and an optional object for additional configuration. If a `foreignKey` were not specified here, the default column name would have been `UserId`. Passing a foreignKey here overrides the default value, and is useful if you're using a different set of naming conventions. Personally, I recommend going with the default so that sequelize won't be fighting you every step of the way. I used `"user_id"` here to show that a different option is available.
 
 #### Child model (Post)
 
@@ -47,3 +47,33 @@ In the `Post` model, we'll call `this.belongsTo()`.
 ```
 
 The same syntax is used here, and we see an additional `onDelete` key. If this is set to `"cascade"`, all the posts by the same author will be deleted when the author is deleted. This is `false` by default on one-to-many relationships. Additionally, we also notice that the `foreignKey` here refers to the parent model's id. This will create a `user_id` column on the child model's table. This makes sense because in one-to-many relationships, the child table is usually the one that has a foreign key, not the parent.
+
+### Many-to-many
+
+A common way to implement a many-to-many relationship between two tables is to create a third 'bridge' table. Sequelize calls this the 'through' table. In our case, the 'through' table is between `Post` and `Tag`. There are different naming conventions, we will call our bridge table `PostTags`.
+
+#### Creating the 'through' table
+
+The documentation tells us that the simplest way to create a many-to-many relationship is to call `this.belongsToMany()` on both models.
+
+In the `Post` model:
+
+```
+    static associate(models) {
+      this.belongsTo(models.User, {
+        foreignKey: "user_id",
+        onDelete: "cascade",
+      });
+      this.belongsToMany(models.Tag, { through: "PostTags", as: "tag" });
+    }
+```
+
+In the `Tag` model:
+
+```
+    static associate(models) {
+      this.belongsToMany(models.Post, { through: "PostTags", as: "post" });
+    }
+```
+
+This will automatically create a `"PostTags"` table if it doesn't exist, and the post table will have a `PostId` column and `TagId` column, both are foreign keys to their corresponding models.
