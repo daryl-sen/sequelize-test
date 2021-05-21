@@ -42,3 +42,7 @@ heading: {
 ```
 
 Not all of these options make sense for the `heading` attribute of the Post model, they're listed here just as an example.
+
+## Applying changes
+
+These changes won't get applied until you run `sequelize.sync( {force: true} )` in your express app. Note that this will drop all the data in your tables! A better way to apply these changes would be through [migrations](/docs/migrations.md).
