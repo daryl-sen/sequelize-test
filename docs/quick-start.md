@@ -63,6 +63,40 @@ Example:
 sequelize model:generate --name User --attributes name:string,email:string,password:string
 ```
 
-This will generate a new model, 'user.js', in the /models directory, as well as the corresponding migration file in the /migrations directory.
+This will generate a new model, 'user.js', in the /models directory, as well as the corresponding migration file in the /migrations directory. Each file in the /models directory represents a model (excluding index.js).
 
-### 5. Edit
+### 5. Setup express
+
+Now that we have the database and one model setup, we can start creating the Express app. The Express app can be created normally, but you will need to import Sequelize and the models you created in order to use Sequelize.
+
+```
+const { sequelize } = require("./models");
+```
+
+This imports ./models/index.js, which also imports all the models in that directory. To import specific models, add the model names to the destructuring:
+
+```
+// imports sequelize and the User model.
+const { sequelize, User } = require("./models");
+```
+
+At this point, your models are created, imported, and ready to go. However, your database is still empty. To create your User table, you need to run the following:
+
+```
+sequelize.sync();
+```
+
+This will create tables based on all the models you created and imported. Note that this is an asynchronous function. You can put this in your `app.listen()` callback with `async` and `await`.
+
+```
+app.listen(PORT, async () => {
+  try {
+    await sequelize.sync();
+  } catch (error) {
+    return console.log(error);
+  }
+  console.log(`Running on port: ${PORT}`);
+});
+```
+
+Now that your Express app and sequelize are set up, you can read about CRUD basics.
