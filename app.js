@@ -55,6 +55,24 @@ app.put("/user", async (req, res) => {
   }
 });
 
+// delete
+app.delete("/user", async (req, res) => {
+  const { email } = req.query;
+  try {
+    const target = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    target.destroy();
+    await target.save();
+    return res.json(target);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
 app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
