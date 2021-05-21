@@ -82,7 +82,7 @@ This will automatically create a `"PostTags"` table if it doesn't exist, and the
 
 Source: https://sequelize.org/master/manual/assocs.html#-code-foo-belongstomany-bar----through--baz-----code-
 
-These special methods are automatically generated whenever a model has a `this.belongsTomany()` association. They allow many-to-many relationships to be created, and are generated dynamically based on the `as` key provided in `static associate()`.
+These special methods are automatically generated whenever a model has a `this.belongsTomany()` association.
 
 ```
 // Post instance         // Tag instance
@@ -97,3 +97,5 @@ These special methods are automatically generated whenever a model has a `this.b
 .removeTags()            .removePosts()
 .createTag()             .createPost()
 ```
+
+They allow many-to-many relationships to be created, and are generated dynamically based on the `as` key provided in `static associate()`. For example, if you had `{ through: "PostTags", as: "watermelon" }`, you will get `.getWatermelons()`, `.countWatermelons()`, `.hasWatermelon()`, etc.
