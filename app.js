@@ -100,6 +100,6 @@ app.listen(PORT, async () => {
   } catch (error) {
     return console.log(error);
   }
-  // await sequelize.sync({ force: true });
+  await sequelize.sync({ force: true });
   console.log(`Running on port: ${PORT}`);
 });
