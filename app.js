@@ -73,6 +73,26 @@ app.delete("/user", async (req, res) => {
   }
 });
 
+// associate
+app.post("/post-tag", async (req, res) => {
+  try {
+    const post = Post.findOne({
+      where: {
+        id: 1,
+      },
+    });
+    const tag = tag.findOne({
+      where: {
+        id: 2,
+      },
+    });
+    post.addTag(tag); // or tag.addPost(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
 app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();

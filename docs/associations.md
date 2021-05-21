@@ -48,6 +48,20 @@ In the `Post` model, we'll call `this.belongsTo()`.
 
 The same syntax is used here, and we see an additional `onDelete` key. If this is set to `"cascade"`, all the posts by the same author will be deleted when the author is deleted. This is `false` by default on one-to-many relationships. Additionally, we also notice that the `foreignKey` here refers to the parent model's id. This will create a `user_id` column on the child model's table. This makes sense because in one-to-many relationships, the child table is usually the one that has a foreign key, not the parent.
 
+#### Creating an entry
+
+When creating a new entry for the model, the model will expect a `user_id` key (or whatever you named it, `UserId` as default). Refer to [basic CRUD](/docs/basic-crud.md).
+
+```
+Post.create({
+  "heading": "My first post!",
+  "content": "Some content here yay",
+  "user_id": 1
+})
+```
+
+Simply enter the author's ID there to associate the foreign key.
+
 ### Many-to-many
 
 A common way to implement a many-to-many relationship between two tables is to create a third 'bridge' table. Sequelize calls this the 'through' table. In our case, the 'through' table is between `Post` and `Tag`. There are different naming conventions, we will call our bridge table `PostTags`.
@@ -99,3 +113,33 @@ These special methods are automatically generated whenever a model has a `this.b
 ```
 
 They allow many-to-many relationships to be created, and are generated dynamically based on the `as` key provided in `static associate()`. For example, if you had `{ through: "PostTags", as: "watermelon" }`, you will get `.getWatermelons()`, `.countWatermelons()`, `.hasWatermelon()`, etc.
+
+#### Creating an entry
+
+When creating an entry with many-to-many associations, either create instances of both models or find them first.
+
+```
+// find both instances first
+app.post("/post-tag", async (req, res) => {
+  try {
+    const post = Post.findOne({
+      where: {
+        id: 1,
+      },
+    });
+    const tag = tag.findOne({
+      where: {
+        id: 2,
+      },
+    });
+    post.addTag(tag); // or tag.addPost(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+```
+
+In the example above, we found the target post using `findOne()`, and found the target tag. Next we assigned the tag to the post using `addTag(tag)`, but you could also have added the post to the tag using `addPost(post)`.
+
+Instead of finding these intances, you can create them instead. You can add multiple tags to a post using `addTags()` and by passing in an array of Tag instances.
