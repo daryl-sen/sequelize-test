@@ -12,7 +12,9 @@ Create a `.env` file based on `.env.example`, then run `node construct-config-js
 
 - [Quick start guide](/docs/quick-start.md)
 - [Performing CRUD operations](/docs/basic-crud.md)
-- [Associations (relationships)](/docs/assocations.md)
+- [Associations (relationships)](/docs/associations.md)
+- [Customizing models](/docs/customizing-models.md)
+- [Customizing sequelize](/docs/customizing-sequelize.md)
 - More to come
 
 ## Video timestamps
