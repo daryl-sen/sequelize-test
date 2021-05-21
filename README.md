@@ -1,5 +1,9 @@
 # Sequelize Beginners' Tutorial
 
+As a new developer, I really, really disliked the sequelize documentation. After watching a couple of videos and getting hands on, I decided to create a beginner's tutorial here. I hope this will benefit some other new developer, and this will serve as a reference for myself in the future too.
+
+In order to keep the information here accurate, I tried to list the relevant page from the official documentation wherever possible.
+
 ## Repo setup
 
 Create a `.env` file based on `.env.example`, then run `node construct-config-json` to generate a config.json file based on your environment variables.
@@ -9,15 +13,15 @@ Create a `.env` file based on `.env.example`, then run `node construct-config-js
 - [Quick start guide](/docs/quick-start.md)
 - [Performing CRUD operations](/docs/basic-crud.md)
 - [Associations (relationships)](/docs/assocations.md)
+- More to come
 
 ## Video timestamps
 
-Parts of this guide are based on the following YouTube video.
+Parts of this guide are based on the following YouTube video. https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
 
-Video: https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
+You can find these as a comment by Daryl Tang below the video.
 
 ```
-
 1:51 - install dependencies and project setup
 2:16 - install `sequelize-cli` globally
 2:33 - run `sequelize init` and fill in json.config
