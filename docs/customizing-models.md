@@ -43,6 +43,23 @@ heading: {
 
 Not all of these options make sense for the `heading` attribute of the Post model, they're listed here just as an example.
 
+## Changing model table names
+
+You can override the default table name by specifying a 'tableName' option just below the generated 'modelName'. This allows better conformation to naming conventions that are not the same as the sequelize configuration (singular vs. plural names, camelCase vs. snake_case, etc).
+
+```
+  Post.init(
+    {
+      content: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Post",
+      tableName: "post",
+    }
+  );
+```
+
 ## Applying changes
 
 These changes won't get applied until you run `sequelize.sync( {force: true} )` in your express app. Note that this will drop all the data in your tables! A better way to apply these changes would be through [migrations](/docs/migrations.md).
