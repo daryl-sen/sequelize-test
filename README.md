@@ -1,218 +1,23 @@
-# Sequelize video tutorial notes
+# Sequelize Beginners' Tutorial
 
 ## Repo setup
 
-A few files have been added to .gitignore:
+Create a `.env` file based on `.env.example`, then run `node construct-config-json` to generate a config.json file based on your environment variables.
 
-```
-.env
-/config/config.json
-```
+## Contents
 
-Reconstruct these files using their respective .example files to set up this repo.
+- [Quick start guide](/docs/quick-start.md)
+- [Performing CRUD operations](/docs/basic-crud.md)
+- [Associations (relationships)](/docs/assocations.md)
 
-## Sources
+## Video timestamps
 
-https://www.youtube.com/watch?v=3qlnR9hK-lQ&t
-
-https://sequelize.org/master/manual/getting-started.html
-
-## Installation
-
-Install sequelize
-
-```
-npm i sequelize
-(sudo) npm i -g sequelize-cli
-```
-
-Depending on the database:
-
-```
-# One of the following:
-npm install --save pg pg-hstore # Postgres
-npm install --save mysql2
-npm install --save mariadb
-npm install --save sqlite3
-npm install --save tedious # Microsoft SQL Server
-```
-
-## Create a database using CLI
-
-Update `config.json` and run `sequelize db:create` to create a database if it doesn't already exist.
-
-## Create a table using CLI
-
-Run `sequelize model:generate --name <name> --attributes <attributes>` to generate a table.
-
-Attributes should be separated by a comma with no spaces, i.e. `--attributes name:string,role:string`. This will generate a new model inside /models with a lower-case version of the name provided.
-
-## Using sequelize in app.js
-
-```
-const { sequelize } = require('./models');
-
-async function main() {
-    await sequelize.sync();
-}
-
-main();
-```
-
-## CRUD
-
-### Create
-
-Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries
-
-```
-// import the model
-const { sequelize, <model> } = require('./models');
-
-// ...
-const newEntry = await <model>.create({ attr1, attr2 });
-return res.json(newEntry);
-// ...
-```
-
-### Bulk create
-
-Source: https://sequelize.org/master/manual/model-querying-basics.html#creating-in-bulk
-
-```
-// ...
-await <model>.bulkcreate([
-    { attr: value },
-    // more objects
-])
-// ...
-```
-
-### Read
-
-Source: https://sequelize.org/master/manual/model-querying-basics.html#applying-where-clauses
-
-```
-// ...
-const target = await <model>.findOne({
-    where: { attr: query }
-})
-// ...
-
-```
-
-### Update
-
-Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-update-queries
-
-```
-//...
-const target = await <model>.findOne({ where: { attr: query}});
-target.attr1 = 'newValue';
-await target.save();
-await target.destroy()
-//...
-```
-
-### Delete
-
-Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-delete-queries
-
-```
-//...
-const target = await <model>.findOne({ where: { attr: query}})
-await target.destroy()
-//...
-```
-
-## Associations (relationships)
-
-Source: https://sequelize.org/master/manual/creating-with-associations.html
-
-### One to many
-
-Find in `/models/<model>.js`
-
-In the parent model:
-
-```
-// ...
-static associate({ <parentModel> }) {
-    this.belongsTo(<parentModel>, { foreignKey: '<parentModelName>Id'});
-}
-// ...
-```
-
-In the child model:
-
-```
-// ...
-static associate({ <childModel> }) {
-    this.hasMany(<childModel>, { foreignKey: '<childModelName>Id' })
-}
-```
-
-### Many to many
-
-https://sequelize.org/master/manual/advanced-many-to-many.html
-
-## Model aliases
-
-When defining a relationship, an alias can be passed to `.belongsTo`
-
-```
-// ...
-static associate({ <parentModel> }) {
-    this.belongsTo(<parentModel>, { foreignKey: '<parentModelName>Id' }, as: 'alias');
-}
-// ...
-```
-
-## Hiding fields
-
-To hide specific fields when retrieving data, go to its model and add the following:
-
-```
-// ...
-static associate() {};
-toJSON() {
-    return { ...this.get(), <attr>: undefined }
-}
-// ...
-```
-
-## Validation
-
-https://sequelize.org/master/manual/validations-and-constraints.html#validators
-
-Add to model attribute:
-
-```
-//...
-name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-        notNull: { msg: 'error message' },
-        // ... add more validators
-    }
-}
-//...
-```
-
-## Seeders
-
-Source: https://www.npmjs.com/package/sequelize-cli
-
-To generate a seeder, use `sequelize seed:generate --name <name>`. This will create a new seeder in /seeders.
-
-To run a seeder, use `sequelize db:seed <name>`, or `sequelize db:seed:all`.
-
-## Timestamps
+Parts of this guide are based on the following YouTube video.
 
 Video: https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
 
 ```
+
 1:51 - install dependencies and project setup
 2:16 - install `sequelize-cli` globally
 2:33 - run `sequelize init` and fill in json.config
@@ -245,4 +50,14 @@ Video: https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
 41:57 - create DELETE endpoint
 42:49 - create UPDATE endpoint
 46:38 - seeders explanation
+
 ```
+
+## Sources
+
+- https://sequelize.org/
+- https://www.youtube.com/watch?v=3qlnR9hK-lQ&t=2021s&ab_channel=Classsed
+- https://stackoverflow.com/questions/28821812/sequelize-many-to-many-how-to-create-a-new-record-and-update-join-table
+- https://stackoverflow.com/questions/28401465/allow-null-value-for-sequelize-foreignkey
+- https://stackoverflow.com/questions/34120548/using-bcrypt-with-sequelize-model
+- https://stackoverflow.com/questions/53946532/how-to-define-an-index-within-a-sequelize-model
