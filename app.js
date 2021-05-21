@@ -10,6 +10,7 @@ app.get("/", async (req, res) => {
   return res.send("Hello");
 });
 
+// create
 app.post("/user", async (req, res) => {
   try {
     const user = await User.create({ ...req.body });
@@ -20,6 +21,7 @@ app.post("/user", async (req, res) => {
   }
 });
 
+// read
 app.get("/user", async (req, res) => {
   const { email } = req.query;
   try {
@@ -29,6 +31,24 @@ app.get("/user", async (req, res) => {
       },
     });
     return res.json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
+// update
+app.put("/user", async (req, res) => {
+  const { email } = req.query;
+  try {
+    const target = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    target.name = "new name";
+    await target.save();
+    return res.json(target);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
