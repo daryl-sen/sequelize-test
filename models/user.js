@@ -1,5 +1,12 @@
 "use strict";
 const { Model } = require("sequelize");
+
+const bcrypt = require("bcrypt");
+
+const checkPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -9,6 +16,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Post, { foreignKey: "user_id" });
+    }
+
+    static generateHash(password) {
+      const saltRounds = 10;
+      return new Promise((resolve, reject) => {
+        bcrypt.hash(password, saltRounds, function (error, hash) {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(hash);
+          }
+        });
+      });
     }
   }
   User.init(
@@ -22,5 +42,11 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
+  User.beforeCreate(async function (user, options) {
+    const hash = await User.generateHash(user.password);
+    user.password = hash;
+    console.log("\n\n" + "password hash: " + hash);
+  });
   return User;
 };
