@@ -32,10 +32,10 @@ The default naming scheme for sequelize is CapitalizedCamelCase, so a foreign ke
 ```
 
 "development": {
-// ...
-"define": {
-"underscored": true
-}
+  // ...
+  "define": {
+  "underscored": true
+  }
 },
 
 ```
