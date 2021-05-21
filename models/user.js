@@ -3,10 +3,6 @@ const { Model } = require("sequelize");
 
 const bcrypt = require("bcrypt");
 
-const checkPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
-
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -43,10 +39,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  User.prototype.checkPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+  };
+
   User.beforeCreate(async function (user, options) {
     const hash = await User.generateHash(user.password);
     user.password = hash;
-    console.log("\n\n" + "password hash: " + hash);
   });
   return User;
 };

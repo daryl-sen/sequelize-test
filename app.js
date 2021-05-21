@@ -93,6 +93,26 @@ app.post("/post-tag", async (req, res) => {
   }
 });
 
+// login
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const targetUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (await targetUser.checkPassword(password)) {
+      // authenticate user
+      return res.end("Logged in");
+    }
+    return res.end("Wrong password");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
 app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
