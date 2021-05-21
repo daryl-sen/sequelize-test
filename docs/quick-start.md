@@ -80,7 +80,7 @@ This imports ./models/index.js, which also imports all the models in that direct
 const { sequelize, User } = require("./models");
 ```
 
-At this point, your models are created, imported, and ready to go. However, your database is still empty. To create your User table, you need to run the following:
+At this point, your models are created, imported, and ready to go. However, your database is still empty. To create your User table, you need to run the following: (you might consider [customizing your model](/docs/customizing-models.md), but you can do that later.)
 
 ```
 sequelize.sync();
@@ -99,4 +99,4 @@ app.listen(PORT, async () => {
 });
 ```
 
-Now that your Express app and sequelize are set up, you can read about CRUD basics.
+Now that your Express app and sequelize are set up, you can read about [CRUD basics](/docs/basic-crud.md).
