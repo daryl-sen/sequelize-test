@@ -77,3 +77,23 @@ In the `Tag` model:
 ```
 
 This will automatically create a `"PostTags"` table if it doesn't exist, and the post table will have a `PostId` column and `TagId` column, both are foreign keys to their corresponding models.
+
+#### Special methods
+
+Source: https://sequelize.org/master/manual/assocs.html#-code-foo-belongstomany-bar----through--baz-----code-
+
+These special methods are automatically generated whenever a model has a `this.belongsTomany()` association. They allow many-to-many relationships to be created, and are generated dynamically based on the `as` key provided in `static associate()`.
+
+```
+// Post instance         // Tag instance
+.getTags()               .getPosts()
+.countTags()             .countPosts()
+.hasTag()                .hasPost()
+.hasTags()               .hasPosts()
+.setTags()               .setPosts()
+.addTag()                .addPost()
+.addTags()               .addPosts()
+.removeTag()             .removePost()
+.removeTags()            .removePosts()
+.createTag()             .createPost()
+```
