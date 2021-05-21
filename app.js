@@ -20,6 +20,21 @@ app.post("/user", async (req, res) => {
   }
 });
 
+app.get("/user", async (req, res) => {
+  const { email } = req.query;
+  try {
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
 app.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
