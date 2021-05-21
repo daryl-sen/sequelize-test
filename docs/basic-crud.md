@@ -99,4 +99,26 @@ After finding the target, its attribute values can be reassigned directly. After
 
 Source: https://sequelize.org/master/manual/model-querying-basics.html#simple-delete-queries
 
-Similar to the update
+Similar to the update method, the target must first be identified. After identifying the target, call `.destroy()` on it to delete it.
+
+```
+// delete
+app.delete("/user", async (req, res) => {
+  const { email } = req.query;
+  try {
+    const target = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    target.destroy();
+    await target.save();
+    return res.json(target);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+```
+
+With basic CRUD taken care of, we can explore [associations](/docs/associations.md), which is what sequelize calls relationships (i.e. one-to-many, many-to-many).
