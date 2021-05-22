@@ -96,6 +96,8 @@ If we run `console.log` on the entire object, the following is what we would see
 At most, what we'd realistically need would be the object from the `"errors"` key. Given the structure of the error object, you can figure out what you want to print in your console when an error occurs.
 
 ```
-const { message, type, value } = error.errors;
-console.log(`ERROR: ${type}\n${message}\nValue received:#{value}`);
+for (const errorObj of error.errors) {
+  const { message, type, value } = errorObj;
+  console.log(`ERROR: ${type}\n${message}\nValue received:#{value}`);
+}
 ```
