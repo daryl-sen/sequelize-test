@@ -98,6 +98,6 @@ At most, what we'd realistically need would be the object from the `"errors"` ke
 ```
 for (const errorObj of error.errors) {
   const { message, type, value } = errorObj;
-  console.log(`ERROR: ${type}\n${message}\nValue received:#{value}`);
+  console.log(`ERROR: ${type}\n${message}\nValue received:${value}`);
 }
 ```
