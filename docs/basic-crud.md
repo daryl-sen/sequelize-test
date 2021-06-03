@@ -112,7 +112,6 @@ app.delete("/user", async (req, res) => {
       },
     });
     target.destroy();
-    await target.save();
     return res.json(target);
   } catch (error) {
     console.log(error);
