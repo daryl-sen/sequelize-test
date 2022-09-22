@@ -57,6 +57,8 @@ sequelize model:generate --name <name> --attributes <attributes>
 
 `attributes` refers to the model attributes (a.k.a table names). Each attribute should be separated by a comma, with no spaces in between, and follows this format: `<attributeName>:<type>`. The `attributeName` can be any alphanumerical value and will be the table column names. The same restrictions to column names in your database of choice will apply here (i.e. no `-` in postgres table column names). The `type` refers to the intended [data type](https://sequelize.org/v5/manual/data-types.html).
 
+Note that by default, sequelize uses camelCase for column names.
+
 Example:
 
 ```
