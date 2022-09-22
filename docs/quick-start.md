@@ -43,7 +43,7 @@ The 'config.json' file created in the previous step contains information that se
 
 Fill in the correct credentials for your database. Since this file contains sensitive information like your database username and password, I recommend adding this file to your .gitignore so this information does not go into your online repo.
 
-If you have not created the database, you can run `sequelize db:create` and sequelize will generate the database for you.
+If you have not created the database, you can run `sequelize db:create` and sequelize will generate the database for you. Note that `db:create` does not work with SQLite databases.
 
 ### 5. Generate models
 
